@@ -9,6 +9,10 @@ title: Changelog
 
 ## main
 
+* Add missing config options to `config.view_component`.
+
+    *Simon Fish*
+
 * Add Within3 to list of companies that use ViewComponent.
 
     *Drew Bragg*
