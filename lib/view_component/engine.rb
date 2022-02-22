@@ -21,6 +21,7 @@ module ViewComponent
       options.preview_route ||= ViewComponent::Base.preview_route
       options.preview_controller ||= ViewComponent::Base.preview_controller
       options.use_global_output_buffer = false if options.use_global_output_buffer.nil?
+      options.generate ||= ViewComponent::Base.generate
 
       if options.show_previews
         options.preview_paths << "#{Rails.root}/test/components/previews" if defined?(Rails.root) && Dir.exist?(
