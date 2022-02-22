@@ -102,6 +102,8 @@ Set a custom default layout used for preview index and individual previews:
 
     config.view_component.default_preview_layout = "component_preview"
 
+Defaults to nil.
+
 ### #generate
 
 Configuration for generators.
@@ -162,6 +164,8 @@ Set the location of component previews:
 
     config.view_component.preview_paths << "#{Rails.root}/lib/component_previews"
 
+Defaults to `[]`.
+
 ### #preview_route
 
 Set the entry route for component previews:
@@ -198,8 +202,8 @@ Set the controller used for testing components:
 
     config.view_component.test_controller = "MyTestController"
 
-Defaults to ApplicationController. Can also be configured on a per-test
-basis using `with_controller_class`.
+Defaults to `nil`. If this is falsy, `"ApplicationComponent"` is used. Can also be
+configured on a per-test basis using `with_controller_class`.
 
 ### #view_component_path
 
@@ -207,7 +211,7 @@ Path for component files
 
     config.view_component.view_component_path = "app/my_components"
 
-Defaults to `app/components`.
+Defaults to `nil`. If this is falsy, `app/components` is used.
 
 ## ViewComponent::TestHelpers
 
