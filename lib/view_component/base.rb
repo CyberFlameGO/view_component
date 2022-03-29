@@ -6,7 +6,6 @@ require "view_component/collection"
 require "view_component/compile_cache"
 require "view_component/content_areas"
 require "view_component/polymorphic_slots"
-require "view_component/previewable"
 require "view_component/slotable"
 require "view_component/slotable_v2"
 require "view_component/with_content_helper"
@@ -15,7 +14,6 @@ module ViewComponent
   class Base < ActionView::Base
     include ActiveSupport::Configurable
     include ViewComponent::ContentAreas
-    include ViewComponent::Previewable
     include ViewComponent::SlotableV2
     include ViewComponent::Translatable
     include ViewComponent::WithContentHelper
