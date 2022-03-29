@@ -309,14 +309,11 @@ module ViewComponent
     # Defaults to `nil`. If this is falsy, `"ApplicationController"` is used. Can also be
     # configured on a per-test basis using `with_controller_class`.
     #
-    mattr_accessor :test_controller
-    @@test_controller = "ApplicationController"
 
     # Set if render monkey patches should be included or not in Rails <6.1:
     #
     #     config.view_component.render_monkey_patch_enabled = false
     #
-    mattr_accessor :render_monkey_patch_enabled, instance_writer: false, default: true
 
     # Path for component files
     #
@@ -324,7 +321,6 @@ module ViewComponent
     #
     # Defaults to `nil`. If this is falsy, `app/components` is used.
     #
-    mattr_accessor :view_component_path, instance_writer: false, default: "app/components"
 
     # Parent class for generated components
     #
@@ -333,7 +329,6 @@ module ViewComponent
     # Defaults to nil. If this is falsy, generators will use
     # "ApplicationComponent" if defined, "ViewComponent::Base" otherwise.
     #
-    mattr_accessor :component_parent_class, instance_writer: false
 
     # Configuration for generators.
     #
@@ -374,9 +369,17 @@ module ViewComponent
     #      config.view_component.generate.preview = true
     #
     #  Defaults to `false`.
-    mattr_accessor :generate, instance_writer: false, default: ActiveSupport::OrderedOptions.new(false)
 
     class << self
+      def application_config
+        Rails.application.config.view_component
+      end
+
+      delegate :generate, :generate=, :component_parent_class, :component_parent_class=,
+               :view_component_path, :view_component_path=, :render_monkey_patch_enabled, :render_monkey_patch_enabled=,
+               :test_controller, :test_controller=,
+               to: :application_config
+
       # @private
       attr_accessor :source_location, :virtual_path
 
