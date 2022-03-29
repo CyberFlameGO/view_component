@@ -13,6 +13,11 @@ require "view_component/with_content_helper"
 module ViewComponent
   class Base < ActionView::Base
     include ActiveSupport::Configurable
+
+    ViewComponent::Config.default.each do |option, default_value|
+      config_accessor option, default: default_value
+    end
+
     include ViewComponent::ContentAreas
     include ViewComponent::SlotableV2
     include ViewComponent::Translatable
@@ -29,10 +34,6 @@ module ViewComponent
     self.content_areas = [] # class_attribute:default doesn't work until Rails 5.2
 
     attr_accessor :__vc_original_view_context
-
-    def self.config
-      ViewComponent::Config.new
-    end
 
     # EXPERIMENTAL: This API is experimental and may be removed at any time.
     # Hook for allowing components to do work as part of the compilation process.
@@ -369,12 +370,6 @@ module ViewComponent
     #  Defaults to `false`.
 
     class << self
-      def application_config
-        Rails.application.config.view_component
-      end
-
-      delegate *ViewComponent::Config.accessor_method_names, to: :application_config
-
       # @private
       attr_accessor :source_location, :virtual_path
 
