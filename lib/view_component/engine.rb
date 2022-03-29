@@ -14,6 +14,7 @@ module ViewComponent
       options = app.config.view_component
 
       if options.show_previews
+        # This is still necessary because when `config.view_component` is declared, `Rails.root` is unspecified.
         options.preview_paths << "#{Rails.root}/test/components/previews" if defined?(Rails.root) && Dir.exist?(
           "#{Rails.root}/test/components/previews"
         )
